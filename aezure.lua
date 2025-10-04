@@ -2205,7 +2205,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 								espAdorn.AdornCullingMode = Enum.AdornCullingMode.Never
 								espAdorn.AlwaysOnTop = true
 								espAdorn.Color3 = player.TeamColor.Color
-								espAdorn.CFrame = CFrame.new(Vector3.new(0,0,0) + CFrame.Angles(math.rad(90), 0, 0))
+								espAdorn.CFrame = CFrame.Angles(math.rad(90),0, 0)
 								espAdorn.ZIndex = 5
 								local billboard = Instance.new("BillboardGui", plrFolder)
 								billboard.Name = rName()
