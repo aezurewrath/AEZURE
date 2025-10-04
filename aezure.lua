@@ -2182,6 +2182,8 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 						character = player.Character
 					until character
 					
+					local hum = character:FindFirstChildWhichIsA("Humanoid")
+					
 					for i, v in pairs(character:GetChildren()) do
 
 						if v:IsA("BasePart") then
@@ -2195,16 +2197,22 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 								espAdorn.AlwaysOnTop = true
 								espAdorn.Color3 = player.TeamColor.Color
 								espAdorn.ZIndex = 5
+								espAdorn.Transparency = .5
 							else
 								local espAdorn = Instance.new("BoxHandleAdornment", plrFolder)
 								espAdorn.Name = rName()
 								setName(espAdorn, v.Name)
 								espAdorn.Adornee = v
-								espAdorn.Size = v.Size
+								if hum and hum.RigType == Enum.HumanoidRigType.R6 then
+									espAdorn.Size = Vector3.new(v.Size.Z, v.Size.Y, v.Size.Z)
+								else
+									espAdorn.Size = v.Size
+								end
 								espAdorn.AdornCullingMode = Enum.AdornCullingMode.Never
 								espAdorn.AlwaysOnTop = true
 								espAdorn.Color3 = player.TeamColor.Color
 								espAdorn.ZIndex = 5
+								espAdorn.Transparency = .5
 								local billboard = Instance.new("BillboardGui", plrFolder)
 								billboard.Name = rName()
 								setName(billboard, "GUI")
