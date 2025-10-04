@@ -2190,22 +2190,20 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 								espAdorn.Name = rName()
 								setName(espAdorn, v.Name)
 								espAdorn.Adornee = v
-								espAdorn.Size = v.Size / 2
+								espAdorn.Size = v.Size
 								espAdorn.AdornCullingMode = Enum.AdornCullingMode.Never
 								espAdorn.AlwaysOnTop = true
 								espAdorn.Color3 = player.TeamColor.Color
 								espAdorn.ZIndex = 5
 							else
-								local espAdorn = Instance.new("CylinderHandleAdornment", plrFolder)
+								local espAdorn = Instance.new("BoxHandleAdornment", plrFolder)
 								espAdorn.Name = rName()
 								setName(espAdorn, v.Name)
 								espAdorn.Adornee = v
-								espAdorn.Radius = v.Size.X / 4
-								espAdorn.Height = v.Size.Y / 2
+								espAdorn.Size = v.Size
 								espAdorn.AdornCullingMode = Enum.AdornCullingMode.Never
 								espAdorn.AlwaysOnTop = true
 								espAdorn.Color3 = player.TeamColor.Color
-								espAdorn.CFrame = CFrame.Angles(math.rad(90),0, 0)
 								espAdorn.ZIndex = 5
 								local billboard = Instance.new("BillboardGui", plrFolder)
 								billboard.Name = rName()
@@ -2217,7 +2215,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 								local label1 = Instance.new("TextLabel", billboard)
 								label1.Name = rName()
 								setName(label1, "Text")
-								label1.Text = v.Name
+								label1.Text = player.Name
 								label1.BackgroundTransparency = 1
 								label1.Size = UDim2.new(1,0,0.5,0)
 								label1.TextColor3 = player.TeamColor.Color
