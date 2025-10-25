@@ -238,6 +238,37 @@ local function getName(x)
 	end
 end
 
+local function getLinesForBoundingBox(size)
+	local x = size.X / 2
+	local y = size.Y / 2
+	local z = size.Z / 2
+	return {
+		Vector3.new(x, y, z),
+		Vector3.new(x, -y, z),
+		Vector3.new(x, y, z),
+		Vector3.new(-x, y, z),
+		Vector3.new(x, y, z),
+		Vector3.new(x, y, -z),
+		Vector3.new(-x,y,-z),
+		Vector3.new(x, y, -z),
+		Vector3.new(-x,y,-z),
+		Vector3.new(-x,y,z),
+		Vector3.new(-x,y,-z),
+		Vector3.new(-x,-y,-z),
+		Vector3.new(x, -y, -z),
+		Vector3.new(x, -y, z),
+		Vector3.new(x, -y, -z),
+		Vector3.new(-x, -y, -z),
+		Vector3.new(x, -y, -z),
+		Vector3.new(x, y, -z),
+		Vector3.new(-x, -y, z),
+		Vector3.new(-x, -y, -z),
+		Vector3.new(-x, -y, z),
+		Vector3.new(-x, y, z),
+		Vector3.new(-x, -y, z),
+		Vector3.new(x, -y, z),
+	}
+end
 
 local colors = {
 	darkest = Color3.fromRGB(9,9,21),
@@ -2144,7 +2175,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	local espcontainer = Instance.new("ForceField", scr)
 	espcontainer.Name = rName()
 	setName(espcontainer, "EspContainer")
-
+	
 	addCommand("locate", {"find"}, "Apply ESP to a player", {"player"}, function(a)
 		if a and a[1] then
 			local player: Player = getPlayer(a[1])
@@ -2235,7 +2266,9 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 				
 				if not espcon then
 					espcon = runsrv.Heartbeat:Connect(function()
+						local i = 0
 						for i, v in pairs(esps) do
+							i += 1
 							local folder = getChild(scr, i.Name)
 							if folder and i.Character then
 								for z, c in pairs(folder:GetChildren()) do
@@ -2247,12 +2280,34 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 								end
 							end
 						end
+						if i == 0 then
+							espcon:Disconnect()
+							espcon = nil
+						end
 					end)
 				end
 			end
 		end
 	end)
-
+	
+	addCommand("unlocate", {}, "Unlocate a player or everyone if [player] is unspecified.", {"player"}, function(a)
+		if a and a[1] then
+			local player = getPlayer(a[1]) 
+			if player then
+				if esps[player] then
+					disconnectTable(esps[player])
+					table.remove(esps, table.find(esps, player))
+				end
+				local folder = getChild(espcontainer, player)
+				if folder then folder:Destroy() end
+			else
+				for i, v in pairs(esps) do
+					disconnectTable(v)
+					esps[i] = nil
+				end
+			end
+		end
+	end)
 
 	addCommand("headsize", {"hs", "hsize"}, "Set [player]'s headsize.", {"player", "size"}, function(a)
 		if a[1] and a[2] and tonumber(a[2]) then
