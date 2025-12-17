@@ -1,0 +1,1 @@
+-- Will be updated to contain obfuscated code of vulnerabilities to prevent idiotic game developers from skidding from here and figuring out how to patch it in their games
