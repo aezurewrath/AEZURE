@@ -382,7 +382,7 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 	Elements["Main"].BackgroundColor3 = setTheme.darkest
 	Elements["Main"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Elements["Main"].BorderSizePixel = 0
-	Elements["Main"].Position = openPosition
+	Elements["Main"].Position = closePosition
 	Elements["Main"].Size = UDim2.new(0.139584959, 0, 0.018127488, 0)
 	Elements["Main"].Parent = parent
 	Elements["Main"].Active = true
@@ -534,7 +534,7 @@ function aelib.ListWindowContentAbove(parent, title, openPosition, closePosition
 	Elements["Main"].BackgroundColor3 = setTheme.darkest
 	Elements["Main"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Elements["Main"].BorderSizePixel = 0
-	Elements["Main"].Position = openPosition
+	Elements["Main"].Position = closePosition
 	Elements["Main"].Size = UDim2.new(0.139584959, 0, 0.018127488, 0)
 	Elements["Main"].Parent = parent
 
