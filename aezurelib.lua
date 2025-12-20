@@ -940,8 +940,9 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_Info"].TextYAlignment = Enum.TextYAlignment.Top
 	Elements["_Info"].AnchorPoint = Vector2.new(0.5, 0.5)
 	Elements["_Info"].BackgroundColor3 = setTheme.bright
+	warn("bg color bright")
 	Elements["_Info"].BackgroundTransparency = 0.4000000059604645
-	Elements["_Info"].BorderColor3 = setTheme.lightest
+	Elements["_Info"].BorderColor3 = setTheme.bright
 	Elements["_Info"].BorderSizePixel = 0
 	Elements["_Info"].Position = UDim2.new(0.5, 0, 0.640324116, 0)
 	Elements["_Info"].Size = UDim2.new(1, 0, 0.719350159, 0)
