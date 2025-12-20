@@ -704,7 +704,7 @@ function aelib.CommandLine(parent)
 	Elements["_UICorner"].Parent = Elements["_Background"]
 
 	Elements["CommandBar"].CursorPosition = -1
-	Elements["CommandBar"].Font = Enum.Font.Unknown
+	Elements["CommandBar"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["CommandBar"].PlaceholderColor3 = setTheme.azure
 	Elements["CommandBar"].PlaceholderText = "ÆZURE"
 	Elements["CommandBar"].Text = ""
@@ -723,7 +723,7 @@ function aelib.CommandLine(parent)
 	Elements["CommandBar"].ZIndex = 2
 	Elements["CommandBar"].Parent = Elements["_Background"]
 
-	Elements["_arrow"].Font = Enum.Font.Unknown
+	Elements["_arrow"].FontFace = Font.new("rbxasset://fonts/families/Inconsolata.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_arrow"].Text = ">"
 	Elements["_arrow"].TextColor3 = setTheme.azure
 	Elements["_arrow"].TextScaled = true
