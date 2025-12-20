@@ -442,14 +442,11 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 
 	Elements["_List"].AutomaticCanvasSize = Enum.AutomaticSize.Y
 	Elements["_List"].BottomImage = ""
-	Elements["_List"].BottomImageContent = Content
 	Elements["_List"].CanvasSize = UDim2.new(0, 0, 1, 0)
 	Elements["_List"].MidImage = ""
-	Elements["_List"].MidImageContent = Content
 	Elements["_List"].ScrollBarThickness = 0
 	Elements["_List"].ScrollingDirection = Enum.ScrollingDirection.Y
 	Elements["_List"].TopImage = ""
-	Elements["_List"].TopImageContent = Content
 	Elements["_List"].VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
 	Elements["_List"].Active = true
 	Elements["_List"].BackgroundColor3 = setTheme.lightest
@@ -592,14 +589,11 @@ function aelib.ListWindowContentAbove(parent, title, openPosition, closePosition
 
 	Elements["_List"].AutomaticCanvasSize = Enum.AutomaticSize.Y
 	Elements["_List"].BottomImage = ""
-	Elements["_List"].BottomImageContent = Content
 	Elements["_List"].CanvasSize = UDim2.new(0, 0, 1, 0)
 	Elements["_List"].MidImage = ""
-	Elements["_List"].MidImageContent = Content
 	Elements["_List"].ScrollBarThickness = 0
 	Elements["_List"].ScrollingDirection = Enum.ScrollingDirection.Y
 	Elements["_List"].TopImage = ""
-	Elements["_List"].TopImageContent = Content
 	Elements["_List"].VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
 	Elements["_List"].Active = true
 	Elements["_List"].BackgroundColor3 = setTheme.lightest
@@ -762,14 +756,11 @@ function aelib.CommandLine(parent)
 	Elements["_UICorner1"].Parent = Elements["CommandIndicator"]
 
 	Elements["Predictions"].BottomImage = ""
-	Elements["Predictions"].BottomImageContent = Content
 	Elements["Predictions"].CanvasSize = UDim2.new(0, 0, 0.5, 0)
 	Elements["Predictions"].MidImage = ""
-	Elements["Predictions"].MidImageContent = Content
 	Elements["Predictions"].ScrollBarThickness = 0
 	Elements["Predictions"].ScrollingDirection = Enum.ScrollingDirection.Y
 	Elements["Predictions"].TopImage = ""
-	Elements["Predictions"].TopImageContent = Content
 	Elements["Predictions"].AnchorPoint = Vector2.new(0.5, 0)
 	Elements["Predictions"].BackgroundColor3 = setTheme.Darkest
 	Elements["Predictions"].BorderColor3 = Color3.fromRGB(0, 0, 0)
