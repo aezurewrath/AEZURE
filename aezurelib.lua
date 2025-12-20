@@ -67,7 +67,7 @@ local function rName()
 end
 
 
-aelib.Theme = {
+aelib.Theme = genv.AEtheme or {
 	darkest = Color3.fromRGB(9,9,21),
 	azure = Color3.fromRGB(138,249,255),
 	white = Color3.fromRGB(255,255,255),
@@ -697,7 +697,7 @@ function aelib.CommandLine(parent)
 	Elements["Main"].Parent = parent
 
 	Elements["_Background"].AnchorPoint = Vector2.new(0.5, 0)
-	Elements["_Background"].BackgroundColor3 = setTheme.Darkest
+	Elements["_Background"].BackgroundColor3 = setTheme.darkest
 	Elements["_Background"].BackgroundTransparency = setTheme.cmdbarTransparency
 	Elements["_Background"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Elements["_Background"].BorderSizePixel = 0
