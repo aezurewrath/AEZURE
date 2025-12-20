@@ -549,7 +549,7 @@ function aelib.ListWindowContentAbove(parent, title, openPosition, closePosition
 	Elements["_UIStroke"].Parent = Elements["_Outline"]
 
 	Elements["_Title"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-	Elements["_Title"].Text = "TITLE"
+	Elements["_Title"].Text = title
 	Elements["_Title"].TextColor3 = setTheme.azure
 	Elements["_Title"].TextScaled = true
 	Elements["_Title"].TextSize = 14
