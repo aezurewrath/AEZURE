@@ -549,7 +549,7 @@ function aelib.ListWindowContentAbove(parent, title, openPosition, closePosition
 	Elements["_UIStroke"].Parent = Elements["_Outline"]
 
 	Elements["_Title"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-	Elements["_Title"].Text = title
+	Elements["_Title"].Text = title or ""
 	Elements["_Title"].TextColor3 = setTheme.azure
 	Elements["_Title"].TextScaled = true
 	Elements["_Title"].TextSize = 14
@@ -917,6 +917,7 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["Main"].Position = UDim2.new(0.182777017, 0, 0.490392953, 0)
 	Elements["Main"].Size = UDim2.new(0.0872479603, 0, 0.0734951794, 0)
 	Elements["Main"].Parent = parent
+	Elements["Main"].ZIndex = math.huge
 
 	Elements["_Title"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_Title"].Text = title or ""
