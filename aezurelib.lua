@@ -399,7 +399,8 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 	Elements["_UIStroke"].Color = setTheme.darkest
 	Elements["_UIStroke"].Thickness = 7
 	Elements["_UIStroke"].Parent = Elements["_Outline"]
-
+	
+	warn("true skibidi")
 	Elements["_Title"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_Title"].Text = title or ""
 	Elements["_Title"].TextColor3 = setTheme.azure
