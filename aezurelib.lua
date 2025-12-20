@@ -480,7 +480,7 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 
 	function functions.Open()
 		Elements["Main"].Visible = true
-		local tween = tweens:Create(Elements["Main"], TweenInfo.new(.35, Enum.EasingStyle.Quad), {Position = closePosition})
+		local tween = tweens:Create(Elements["Main"], TweenInfo.new(.35, Enum.EasingStyle.Quad), {Position = openPosition})
 		tween:Play()
 	end
 
@@ -635,7 +635,7 @@ function aelib.ListWindowContentAbove(parent, title, openPosition, closePosition
 
 	function functions.Open()
 		Elements["Main"].Visible = true
-		local tween = tweens:Create(Elements["Main"], TweenInfo.new(.35, Enum.EasingStyle.Quad), {Position = closePosition})
+		local tween = tweens:Create(Elements["Main"], TweenInfo.new(.35, Enum.EasingStyle.Quad), {Position = openPosition})
 		tween:Play()
 	end
 
