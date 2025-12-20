@@ -400,7 +400,7 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 	Elements["_UIStroke"].Thickness = 7
 	Elements["_UIStroke"].Parent = Elements["_Outline"]
 
-	Elements["_Title"].Font = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+	Elements["_Title"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_Title"].Text = title or ""
 	Elements["_Title"].TextColor3 = setTheme.azure
 	Elements["_Title"].TextScaled = true
@@ -416,7 +416,7 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 	Elements["_Title"].Size = UDim2.new(0.382889152, 0, 1.00000012, 0)
 	Elements["_Title"].Parent = Elements["Main"]
 
-	Elements["_Close"].Font = Font.new("rbxasset://fonts/families/FredokaOne.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+	Elements["_Close"].FontFace = Font.new("rbxasset://fonts/families/FredokaOne.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_Close"].Text = "X"
 	Elements["_Close"].TextColor3 = setTheme.red
 	Elements["_Close"].TextSize = 14
