@@ -67,7 +67,7 @@ local function rName()
 end
 
 
-aelib.Theme = genv.AEtheme or {
+aelib.Theme = {
 	darkest = Color3.fromRGB(9,9,21),
 	azure = Color3.fromRGB(138,249,255),
 	white = Color3.fromRGB(255,255,255),
@@ -83,6 +83,7 @@ aelib.Theme = genv.AEtheme or {
 
 
 }
+
 
 local setTheme = aelib.Theme
 
@@ -974,8 +975,6 @@ function aelib.TitleWindowDescription(parent, title, description)
 	return Elements
 
 end
-
-
 
 
 return aelib
