@@ -930,6 +930,7 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_Title"].BorderSizePixel = 0
 	Elements["_Title"].Size = UDim2.new(1, 0, 0.280649275, 0)
 	Elements["_Title"].Parent = Elements["Main"]
+	Elements["_Title"].ZIndex = 2
 
 	Elements["_Info"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_Info"].Text = description or ""
@@ -944,7 +945,7 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_Info"].BorderSizePixel = 0
 	Elements["_Info"].Position = UDim2.new(0.5, 0, 0.640324116, 0)
 	Elements["_Info"].Size = UDim2.new(1, 0, 0.719350159, 0)
-	Elements["_Info"].ZIndex = 0
+	Elements["_Info"].ZIndex = 1
 	Elements["_Info"].Parent = Elements["Main"]
 
 	Elements["_UIStroke"].Color = Color3.fromRGB(255, 255, 255)
