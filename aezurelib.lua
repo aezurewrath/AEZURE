@@ -955,8 +955,8 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_UIGradient"].Color = ColorSequence.new{
 		ColorSequenceKeypoint.new(0, setTheme.darkest),
 		ColorSequenceKeypoint.new(0.2987910211086273, setTheme.darkest),
-		ColorSequenceKeypoint.new(0.3056994676589966, setTheme.lightest),
-		ColorSequenceKeypoint.new(1, setTheme.lightest)
+		ColorSequenceKeypoint.new(0.3056994676589966, setTheme.bright),
+		ColorSequenceKeypoint.new(1, setTheme.bright)
 	}
 	Elements["_UIGradient"].Rotation = 90
 	Elements["_UIGradient"].Transparency = NumberSequence.new{
