@@ -762,7 +762,7 @@ function aelib.CommandLine(parent)
 	Elements["Predictions"].ScrollingDirection = Enum.ScrollingDirection.Y
 	Elements["Predictions"].TopImage = ""
 	Elements["Predictions"].AnchorPoint = Vector2.new(0.5, 0)
-	Elements["Predictions"].BackgroundColor3 = setTheme.Darkest
+	Elements["Predictions"].BackgroundColor3 = setTheme.darkest
 	Elements["Predictions"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Elements["Predictions"].BorderSizePixel = 0
 	Elements["Predictions"].Position = UDim2.new(0.101000004, 0, -0.0900000036, 0)
