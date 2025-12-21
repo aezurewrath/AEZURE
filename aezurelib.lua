@@ -401,7 +401,6 @@ function aelib.ListWindow(parent, title, openPosition, closePosition)
 	Elements["_UIStroke"].Thickness = 7
 	Elements["_UIStroke"].Parent = Elements["_Outline"]
 	
-	warn("true skibidi")
 	Elements["_Title"].FontFace = Font.new("rbxasset://fonts/families/Nunito.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 	Elements["_Title"].Text = title or ""
 	Elements["_Title"].TextColor3 = setTheme.azure
@@ -766,7 +765,6 @@ function aelib.CommandLine(parent)
 	Elements["Predictions"].ScrollingDirection = Enum.ScrollingDirection.Y
 	Elements["Predictions"].TopImage = ""
 	Elements["Predictions"].AnchorPoint = Vector2.new(0.5, 0)
-	warn("bg color predictions doing that thing lol")
 	Elements["Predictions"].BackgroundColor3 = setTheme.darkest
 	Elements["Predictions"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Elements["Predictions"].BorderSizePixel = 0
@@ -943,10 +941,9 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_Info"].TextWrapped = true
 	Elements["_Info"].TextYAlignment = Enum.TextYAlignment.Top
 	Elements["_Info"].AnchorPoint = Vector2.new(0.5, 0.5)
-	Elements["_Info"].BackgroundColor3 = setTheme.bright
-	warn("bg color bright")
+	Elements["_Info"].BackgroundColor3 = setTheme.light
 	Elements["_Info"].BackgroundTransparency = 0.4000000059604645
-	Elements["_Info"].BorderColor3 = setTheme.bright
+	Elements["_Info"].BorderColor3 = setTheme.light
 	Elements["_Info"].BorderSizePixel = 0
 	Elements["_Info"].Position = UDim2.new(0.5, 0, 0.640324116, 0)
 	Elements["_Info"].Size = UDim2.new(1, 0, 0.719350159, 0)
@@ -961,8 +958,8 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_UIGradient"].Color = ColorSequence.new{
 		ColorSequenceKeypoint.new(0, setTheme.darkest),
 		ColorSequenceKeypoint.new(0.2987910211086273, setTheme.darkest),
-		ColorSequenceKeypoint.new(0.3056994676589966, setTheme.bright),
-		ColorSequenceKeypoint.new(1, setTheme.bright)
+		ColorSequenceKeypoint.new(0.3056994676589966, setTheme.light),
+		ColorSequenceKeypoint.new(1, setTheme.light)
 	}
 	Elements["_UIGradient"].Rotation = 90
 	Elements["_UIGradient"].Transparency = NumberSequence.new{
