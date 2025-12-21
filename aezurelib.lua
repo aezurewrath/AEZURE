@@ -809,6 +809,7 @@ function aelib.AddPrediction(parent, text)
 	Elements["Main"].BorderColor3 = setTheme.lightest
 	Elements["Main"].Position = UDim2.new(0.0398302823, 0, 0.694058359, 0)
 	Elements["Main"].Size = UDim2.new(1, 0, 0, 23)
+	Elements["Main"].Text = text
 	Elements["Main"].Parent = parent
 
 	return Elements["Main"]
