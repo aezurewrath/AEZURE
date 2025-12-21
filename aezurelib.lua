@@ -942,7 +942,7 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_Info"].TextYAlignment = Enum.TextYAlignment.Top
 	Elements["_Info"].AnchorPoint = Vector2.new(0.5, 0.5)
 	Elements["_Info"].BackgroundColor3 = setTheme.light
-	Elements["_Info"].BackgroundTransparency = 0.4000000059604645
+	Elements["_Info"].BackgroundTransparency = 0.1000000059604645
 	Elements["_Info"].BorderColor3 = setTheme.light
 	Elements["_Info"].BorderSizePixel = 0
 	Elements["_Info"].Position = UDim2.new(0.5, 0, 0.640324116, 0)
@@ -965,8 +965,8 @@ function aelib.TitleWindowDescription(parent, title, description)
 	Elements["_UIGradient"].Transparency = NumberSequence.new{
 		NumberSequenceKeypoint.new(0, 0),
 		NumberSequenceKeypoint.new(0.304239422082901, 0),
-		NumberSequenceKeypoint.new(0.3070000112056732, 0.4000000059604645),
-		NumberSequenceKeypoint.new(1, 0.4000000059604645)
+		NumberSequenceKeypoint.new(0.3070000112056732, 0.1000000059604645),
+		NumberSequenceKeypoint.new(1, 0.1000000059604645)
 	}
 	Elements["_UIGradient"].Parent = Elements["_UIStroke"]
 	
