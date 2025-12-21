@@ -336,6 +336,7 @@ function aelib.EmptyField(parent, text)
 	Elements["Main"].TextColor3 = setTheme.white
 	Elements["Main"].TextScaled = true
 	Elements["Main"].TextSize = 14
+	Elements["Main"].Text = ""
 	Elements["Main"].TextWrapped = true
 	Elements["Main"].BackgroundColor3 = setTheme.light
 	Elements["Main"].BorderColor3 = Color3.fromRGB(0, 0, 0)
