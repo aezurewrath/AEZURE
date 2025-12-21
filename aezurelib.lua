@@ -190,6 +190,7 @@ function aelib.ListLabelOneButton(parent, text, buttonText, buttonCallback1, but
 	Elements["_Button"].Position = UDim2.new(0.7, 0, 0.5, 0)
 	Elements["_Button"].Size = UDim2.new(0.3, 0, 1, 0)
 	Elements["_Button"].Parent = Elements["Main"]
+	Elements["_Button"].ZIndex = 2
 
 	Elements["_UICorner1"].CornerRadius = UDim.new(0.2, 0)
 	Elements["_UICorner1"].Parent = Elements["_Button"]
@@ -199,7 +200,7 @@ function aelib.ListLabelOneButton(parent, text, buttonText, buttonCallback1, but
 	Elements["_Background"].BorderSizePixel = 0
 	Elements["_Background"].Position = UDim2.new(0.7, 0, 0.5, 0)
 	Elements["_Background"].Size = UDim2.new(0.21, 0, 1, 0)
-	Elements["_Background"].ZIndex = 0
+	Elements["_Background"].ZIndex = 1
 	Elements["_Background"].Parent = Elements["Main"]
 
 	Elements["_UISizeConstraint"].MinSize = Vector2.new(0, 27)
