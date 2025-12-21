@@ -536,6 +536,8 @@ function aelib.ListWindowContentAbove(parent, title, openPosition, closePosition
 	Elements["Main"].Position = closePosition
 	Elements["Main"].Size = UDim2.new(0.139584959, 0, 0.018127488, 0)
 	Elements["Main"].Parent = parent
+	Elements["Main"].Active = true
+	Elements["Main"].Draggable = true
 
 	Elements["_Outline"].BackgroundColor3 = setTheme.darkest
 	Elements["_Outline"].BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -809,7 +811,6 @@ function aelib.AddPrediction(parent, text)
 	Elements["Main"].BorderColor3 = setTheme.lightest
 	Elements["Main"].Position = UDim2.new(0.0398302823, 0, 0.694058359, 0)
 	Elements["Main"].Size = UDim2.new(1, 0, 0, 23)
-	print(text)
 	Elements["Main"].Text = text or ""
 	Elements["Main"].Parent = parent
 
