@@ -811,6 +811,13 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		if currentplugin then
 			name = `{currentplugin}:{name}`
 		end
+		
+		warn("---------ADD COMMAND---------")
+		print(name)
+		print(table.concat(aliases, ", "))
+		print(description)
+		print(table.concat(args, ", "))
+		print(cback ~= nil)
 
 
 		table.insert(aliases, string.lower(name))
