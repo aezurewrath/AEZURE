@@ -848,6 +848,10 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		table.remove(givenArgs, 1)
 		local toRun = nil
 		local toRunP = nil
+		
+		warn("---RUNCMD---")
+		print(cmd)
+		warn("---RUNCMD---")
 
 
 
