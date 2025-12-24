@@ -75,6 +75,7 @@ local players = game:GetService("Players")
 local plr = players.LocalPlayer
 local core = game:GetService("CoreGui").RobloxGui
 local uis = game:GetService("UserInputService")
+local teleports = game:GetService("TeleportService")
 local repstore = game:GetService("ReplicatedStorage")
 local httpservice = game:GetService("HttpService")
 local tweens = game:GetService("TweenService")
@@ -2148,7 +2149,22 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			runCmd(`gotov3 {mouse.Hit.Position.X} {mouse.Hit.Position.Y} {mouse.Hit.Position.Z}`)
 		end
 	end)
+
+	addCommand("serverhop", {}, "Rejoin the game in a random server.", {}, function(a)
+		
+		notify("Rejoin", "Please wait...", 2)
+		wait(1)
+		
+		teleports:Teleport(game.PlaceId, plr)
+	end)
 	
+	addCommand("rejoin", {"rj"}, "Rejoin the same server.", {}, function(a)
+
+		notify("Rejoin", "Please wait...", 2)
+		wait(1)
+
+		teleports:TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
+	end)
 	
 	
 	local gameType = nil
