@@ -838,13 +838,14 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 
 	local function decompile(str)
-		return string.split(string.lower(str), " ")
+		return string.split(str, " ")
 	end
 
 	local function runCmd(cmd)
 		local decompiled = decompile(cmd)
 		print(decompiled)
 		local command = decompiled[1]
+		command = string.lower(command)
 		local givenArgs = decompiled
 		table.remove(givenArgs, 1)
 		local toRun = nil
@@ -875,6 +876,15 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 
 		if toRun then
+			
+			for i, v in pairs(givenArgs) do
+				if toRunP.args ~= "path" and toRunP.args ~= "parent" then
+					givenArgs[i] = string.lower(v)
+				end
+			end
+			
+			
+			
 			local plrAsArg = table.find(toRunP.args, "player")
 			if plrAsArg then
 				if string.lower(tostring(givenArgs[plrAsArg])) == "all" then
@@ -2164,6 +2174,52 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		wait(1)
 
 		teleports:TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
+	end)
+	
+	local freecamconn = nil
+	local freecamconninput = nil
+	local freecamspeed = 1
+	addCommand("freecam", {"fc"}, nil, {"speed"}, function(a)
+		
+		local speedpassed = false
+		if a and a[1] and tonumber(a[1]) then
+			freecamspeed = tonumber(a[1])
+			speedpassed = true
+		end
+		
+		if freecamconn and not speedpassed then
+			freecamconn:Disconnect()
+			freecamconninput:Disconnect()
+			freecamconn = nil
+			freecamconninput = nil
+			freecamspeed = 1
+			cas:UnbindAction("BlockMovement")
+			return
+		end
+		
+		if not freecamconn then
+			cas:BindAction("BlockMovement", function() return Enum.ContextActionResult.Sink end, false, Enum.KeyCode.W, Enum.KeyCode.D, 
+				Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.Space, Enum.KeyCode.Up, Enum.KeyCode.Down, Enum.KeyCode.Right, Enum.KeyCode.Left)
+
+			freecamconn = runsrv.RenderStepped:Connect(function(dt)
+				
+				local movevec = Vector3.zero
+				local cf = workspace.CurrentCamera.CFrame
+				
+				if uis:IsKeyDown(Enum.KeyCode.W) then movevec += cf.LookVector * freecamspeed end
+				if uis:IsKeyDown(Enum.KeyCode.S) then movevec -= cf.LookVector * freecamspeed end
+				if uis:IsKeyDown(Enum.KeyCode.D) then movevec += cf.RightVector * freecamspeed end
+				if uis:IsKeyDown(Enum.KeyCode.A) then movevec -= cf.RightVector * freecamspeed end
+				if uis:IsKeyDown(Enum.KeyCode.E) then movevec += cf.UpVector * freecamspeed end
+				if uis:IsKeyDown(Enum.KeyCode.Q) then movevec -= cf.UpVector * freecamspeed end
+				
+			end)
+		end
+		
+		
+		
+		
+		
 	end)
 	
 	
