@@ -168,7 +168,7 @@ if dataloaded then
 	data = httpservice:JSONDecode(data_)
 end
 
-local function rName()
+function rName()
 	if not genv.AEtakeName then
 		return string.rep(string.char(math.random(1,128)), math.random(1,25))
 	else
@@ -186,7 +186,7 @@ local function rName()
 end
 
 
-local function getPlayer(str)
+function getPlayer(str)
 	local foundPlayer = nil
 	for i, v in pairs(players:GetPlayers()) do
 		local a = string.sub(string.lower(v.Name),1,string.len(string.lower(str)))
@@ -198,7 +198,7 @@ local function getPlayer(str)
 	return foundPlayer
 end
 
-local function getChild(parent, name)
+function getChild(parent, name)
 	if parent and name then
 		for i, v in pairs(parent:GetChildren()) do
 			if v:GetAttribute("AEname") and v:GetAttribute("AEname") == tostring(name) then
@@ -208,7 +208,7 @@ local function getChild(parent, name)
 	end
 end
 
-local function getDescendant(parent, name)
+function getDescendant(parent, name)
 	if parent and name then
 		for i, v in pairs(parent:GetDescendants()) do
 			if v:GetAttribute("AEname") and v:GetAttribute("AEname") == tostring(name) then
@@ -218,7 +218,7 @@ local function getDescendant(parent, name)
 	end
 end
 
-local function findFirstChild(parent, name)
+function findFirstChild(parent, name)
 	if parent and name then
 		for i, v in pairs(parent:GetChildren()) do
 			if v:GetAttribue(name) then
@@ -228,19 +228,19 @@ local function findFirstChild(parent, name)
 	end
 end
 
-local function setName(x, name)
+function setName(x, name)
 	if x then
 		x:SetAttribute("AEname", tostring(name))
 	end
 end
 
-local function getName(x)
+function getName(x)
 	if x:GetAttribute("AEname") then
 		return x:GetAttribute("AEname")
 	end
 end
 
-local function getLinesForBoundingBox(size)
+function getLinesForBoundingBox(size)
 	local x = size.X / 2
 	local y = size.Y / 2
 	local z = size.Z / 2
@@ -290,13 +290,13 @@ local aeLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/aezurew
 
 
 
-local function disconnectTable(x)
+function disconnectTable(x)
 	for i, v in pairs(x) do
 		v:Disconnect()
 	end
 end
 
-local function kc(x)
+function kc(x)
 	local kp = {
 		["Enum.KeyCode.A"] = Enum.KeyCode.A,
 		["Enum.KeyCode.B"] = Enum.KeyCode.B,
@@ -379,7 +379,7 @@ end
 
 scrName = rName()
 
-local function checkTrue(x)
+function checkTrue(x)
 	local truevalues = {"true", "yes", "t", "y"}
 	if table.find(truevalues, string.lower(x)) then
 		return true
@@ -388,7 +388,7 @@ local function checkTrue(x)
 	end
 end
 
-local function getPlayerNames()
+function getPlayerNames()
 	local x = {}
 	for i, v in pairs(players:GetPlayers()) do
 		table.insert(x, v.Name)
@@ -396,7 +396,7 @@ local function getPlayerNames()
 	return x
 end
 
-local function checkCommandTarget(x)
+function checkCommandTarget(x)
 	warn("check Command Target", x)
 	if x then
 		x = string.lower(x)
@@ -465,12 +465,12 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	local cmdbarclosetween = tweens:Create(commandlineMain.Main, TweenInfo.new(.2, Enum.EasingStyle.Quad), {Position = UDim2.new(0.5,0,1.02,0)})
 	local showbarcmd = tweens:Create(commandlineMain.CommandIndicator, TweenInfo.new(.2, Enum.EasingStyle.Quad), {BackgroundTransparency = .3})
 	
-	local function openCmdLine()
+	function openCmdLine()
 		cmdbaropentween:Play()
 		hidebarcmd:Play()
 	end
 	
-	local function closeCmdLine()
+	function closeCmdLine()
 		cmdbarclosetween:Play()
 		showbarcmd:Play()
 		commandlineMain.Predictions.Visible = false
@@ -541,11 +541,11 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	local keybindsStates = {}
 
 
-	local function gettype(x)
+	function gettype(x)
 		return settingtypes[x]
 	end
 
-	local function destringify(x)
+	function destringify(x)
 		if type(x) == "string" then
 			if string.find(string.lower(x), "enum") then
 				return kc(x)
@@ -584,7 +584,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 	end
 
-	local function returnsavedata()
+	function returnsavedata()
 		local tmp = {}
 		local tmp1 = {}
 		local tmp2 = {}
@@ -797,7 +797,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 	
 	local currentplugin = nil
-	local function addCommand(name: string, aliases, description, args, cback)
+	function addCommand(name: string, aliases, description, args, cback)
 		if not description then
 			description = "None"
 		end
@@ -837,11 +837,11 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	end
 
 
-	local function decompile(str)
+	function decompile(str)
 		return string.split(str, " ")
 	end
 
-	local function runCmd(cmd)
+	function runCmd(cmd)
 		local decompiled = decompile(cmd)
 		print(decompiled)
 		local command = decompiled[1]
@@ -2266,6 +2266,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 					if s1 and e1 then
 						local pluginsub = string.gsub(v, "aezure", "")
 						pluginsub = string.gsub(pluginsub, ".aeplgn", "")
+						pluginsub = string.gsub(pluginsub, "/", "")
 						currentplugin = pluginsub
 						local _plugin = loadstring(e1)()
 					end
