@@ -286,7 +286,7 @@ local colors = {
 
 -- UDim2.new(0,0,0.79,0)
 
-local aeLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/aezurewrath/AEZURE/refs/heads/main/aezurelib.lua"))()
+aeLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/aezurewrath/AEZURE/refs/heads/main/aezurelib.lua"))()
 
 
 
