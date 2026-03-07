@@ -2224,7 +2224,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	
 	
 	local gameType = nil
-	local vulnerabilities = loadstring(game:HttpGet("https://raw.githubusercontent.com/aezurewrath/AEZURE/refs/heads/main/vulnerabilities.lua"))()
+	vulnerabilities = loadstring(game:HttpGet("https://raw.githubusercontent.com/aezurewrath/AEZURE/refs/heads/main/vulnerabilities.lua"))()
 	
 	genv.vulnMethods = {}
 
