@@ -141,10 +141,26 @@ else
 	notify("⚠️IMPORTANT⚠️", "Your executor can't write files. Your settings and keybinds will not save.", 10)
 end
 
+
+
 if readfile then
 	canread = true
 end
 
+if canwrite and canread then
+	task.spawn(function()
+		local s, e = pcall(function()
+			if isfolder("aezure") == nil then
+				makefolder("aezure")
+			end
+		end)
+		if s then
+			local s, e = pcall(function()
+				writefile("aezure/README.txt", "This folder is for storing your AEZURE plugins. Keybinds and settings are stored in the workspace folder in the data.ae file.")
+			end)
+		end
+	end)
+end
 
 function saveData(data)
 	if canwrite then
@@ -167,6 +183,9 @@ local data = nil
 if dataloaded then
 	data = httpservice:JSONDecode(data_)
 end
+
+
+
 
 function rName()
 	if not genv.AEtakeName then
@@ -455,27 +474,27 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 
 	--[[-----------------------------------COMMAND LINE-----------------------------------]]--
-	
+
 	local commandlineMain = aeLib.CommandLine(scr)
 	local cmdBar : TextBox = commandlineMain.CommandBar
 	commandlineMain.Predictions.Visible = false
-	
+
 	local cmdbaropentween = tweens:Create(commandlineMain.Main, TweenInfo.new(.2, Enum.EasingStyle.Quad), {Position = UDim2.new(0.5,0,0.94,0)})
 	local hidebarcmd = tweens:Create(commandlineMain.CommandIndicator, TweenInfo.new(.2, Enum.EasingStyle.Quad), {BackgroundTransparency = 1})
 	local cmdbarclosetween = tweens:Create(commandlineMain.Main, TweenInfo.new(.2, Enum.EasingStyle.Quad), {Position = UDim2.new(0.5,0,1.02,0)})
 	local showbarcmd = tweens:Create(commandlineMain.CommandIndicator, TweenInfo.new(.2, Enum.EasingStyle.Quad), {BackgroundTransparency = .3})
-	
+
 	function openCmdLine()
 		cmdbaropentween:Play()
 		hidebarcmd:Play()
 	end
-	
+
 	function closeCmdLine()
 		cmdbarclosetween:Play()
 		showbarcmd:Play()
 		commandlineMain.Predictions.Visible = false
 	end
-	
+
 	commandlineMain.Main:GetPropertyChangedSignal("GuiState"):Connect(function()
 		if commandlineMain.Main.GuiState == Enum.GuiState.Hover then
 			openCmdLine()
@@ -486,8 +505,8 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			cmdBar:CaptureFocus()
 		end
 	end)
-	
-	
+
+
 
 	--[[-----------------------------------COMMAND LINE-----------------------------------]]--
 
@@ -624,7 +643,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 
 	local settingsMenu, settingsMenuConnections, settingsMenuFunctions = aeLib.ListWindow(scr, "SETTINGS")
-	
+
 
 	print("yes")
 
@@ -691,8 +710,8 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	--[[-----------------------------------KEYBINDS-----------------------------------]]--
 
 	local keybindMenu, keybindMenuConnections, keybindMenuFunctions = aeLib.ListWindowContentAbove(scr, "KEYBINDS")
-	
-	
+
+
 
 
 	for i, v in pairs(keybinds) do
@@ -712,25 +731,25 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	local kbinding = false
 	local kbindselect = nil
 	local kbindtoggle = false
-	
-	
+
+
 	local cmdInput1b = aeLib.EmptyField(keybindMenu._ContentFrame, "COMMAND 1")
 	local cmdInput2b = aeLib.EmptyField(keybindMenu._ContentFrame, "COMMAND 2")
 	local cmdInput1 = cmdInput1b.Main
 	cmdInput1.Position = UDim2.new(0,0,0.01,0)
 	local cmdInput2 = cmdInput2b.Main
 	cmdInput2.Position = UDim2.new(0,0,0.3,0)
-	
+
 	local setbindbutton = aeLib.EmptyButton(keybindMenu._ContentFrame, "SET BIND", function()
 		kbinding = true
 	end)
-	
+
 	setbindbutton.Main.Position = UDim2.new(0, 0, 0.59,0)
 	setbindbutton.Main.Size = UDim2.new(0.3,0,0.225,0)
-	
-	
+
+
 	local setbindtogglebutton = nil
-	
+
 	setbindtogglebutton = aeLib.EmptyButton(keybindMenu._ContentFrame, "TOGGLE [INACTIVE]", function()
 		if not kbindtoggle then
 			kbindtoggle = true
@@ -740,12 +759,12 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			setbindtogglebutton.Main.Text = "TOGGLE [INACTIVE]"
 		end
 	end)
-	
+
 	setbindtogglebutton.Main.Position = UDim2.new(0.7,0,0.59,0)
 	setbindtogglebutton.Main.Size = UDim2.new(0.3,0,0.225,0)
-	
+
 	local addbindbutton = nil
-	
+
 	addbindbutton = aeLib.EmptyButton(keybindMenu._ContentFrame, "ADD BIND", function()
 		if not kbinding and kbindselect then
 			local tmp = {}
@@ -783,7 +802,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 		end
 	end)
-	
+
 	addbindbutton.Main.Position = UDim2.new(0.349, 0, 0.59, 0)
 	addbindbutton.Main.Size = UDim2.new(0.3,0,0.225,0)
 
@@ -791,11 +810,11 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	--[[-----------------------------------KEYBINDS-----------------------------------]]--
 
 
-	
+
 
 	local cmds = {}
 
-	
+
 	local currentplugin = nil
 	function addCommand(name: string, aliases, description, args, cback)
 		if not description then
@@ -808,11 +827,11 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		end
 
 		temp = args
-		
+
 		if currentplugin then
 			name = `{currentplugin}:{name}`
 		end
-		
+
 		warn("---------ADD COMMAND---------")
 		print(name)
 		print(table.concat(aliases, ", "))
@@ -823,10 +842,6 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 		table.insert(aliases, string.lower(name))
 		local tmp = {}
-		table.insert(tmp, "description")
-		table.insert(tmp, "aliases")
-		table.insert(tmp, "args")
-		table.insert(tmp, "callback")
 		tmp["description"] = description
 		tmp["aliases"] = aliases
 		tmp["args"] = args
@@ -850,7 +865,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		table.remove(givenArgs, 1)
 		local toRun = nil
 		local toRunP = nil
-		
+
 		warn("---RUNCMD---")
 		print(cmd)
 		warn("---RUNCMD---")
@@ -876,15 +891,15 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 
 		if toRun then
-			
+
 			for i, v in pairs(givenArgs) do
 				if toRunP.args ~= "path" and toRunP.args ~= "parent" then
 					givenArgs[i] = string.lower(v)
 				end
 			end
-			
-			
-			
+
+
+
 			local plrAsArg = table.find(toRunP.args, "player")
 			if plrAsArg then
 				if string.lower(tostring(givenArgs[plrAsArg])) == "all" then
@@ -963,7 +978,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end)
-	
+
 	addCommand("debug:test", {}, "mango", {}, function(a)
 		print("something")
 	end)
@@ -1078,19 +1093,19 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			cwalk:Disconnect()
 			cwalk = nil
 		end
-		
+
 		if a[2] and checkTrue(a[2]) then
 			cwalkdisableondeath = true
 		end
-		
+
 		if a[3] and checkTrue(a[3]) then
 			cwalkRun = true
 		end
-		
+
 		if a[4] and checkTrue(a[4]) then
 			cwalkrunning = true
 		end
-		
+
 
 		if a[1] then
 			local value = tonumber(a[1])
@@ -1107,8 +1122,8 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 						seatbindcwalk:Disconnect()
 						cwalkdied:Disconnect()
 					end)
-					
-					
+
+
 					local cwalkcharacteradd = nil
 					cwalkcharacteradd = plr.CharacterAdded:Connect(function()
 						if not cwalk and cwalkcharacteradd then cwalkcharacteradd:Disconnect() return end
@@ -1116,13 +1131,13 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 						task.wait(1)
 						if cwalkdisableondeath then return end
 						runCmd("cwalk ".. value.. " "..tostring(cwalkdisableondeath).. " ".. tostring(cwalkRun).. " ".. tostring(cwalkrunning))
- 					end)
+					end)
 
 				end)
 
 				cwalk = runsrv.Stepped:Connect(function()
 					local h2  = plr.Character:FindFirstChildWhichIsA("Humanoid")
-					
+
 					if cwalkRun then
 
 						if h2 and h2:GetState() == Enum.HumanoidStateType.Running and plr.Character and ableto then
@@ -1160,14 +1175,14 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 	local walkfling = nil
 	local flingintensity = 1
-	
-	
+
+
 	addCommand("walkfling", {"wfling", "wf"}, "Apply a force to your character to fling people that touch you.", {"strength"}, function(a)
 		if walkfling then 
 			runCmd("unwf")
 		end
 		flingintensity = 1
-		
+
 		if a and a[1] and tonumber(a[1]) then
 			flingintensity = tonumber(a[1])
 		end
@@ -1215,7 +1230,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			runCmd("unfreeze")
 		end
 	end)
-	
+
 	addCommand("velocity", {}, "Set your velocity to a certain value", {"velocity"}, function(a)
 		if a and a[1] and a[2] and a[3] and tonumber(a[1]) and tonumber(a[2]) and tonumber(a[3]) then
 			local char = plr.Character
@@ -1228,29 +1243,29 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end)
-	
+
 	local stopfling = false
 
 	addCommand("fling", {}, "Teleport to a player and attempt to fling them. May not work if they are moving.", {"player", "strength"}, function(a)
 		local savedpos = plr.Character.PrimaryPart.Position
-		
+
 		local v = 1
 		if a and a[2] and tonumber(a[2]) then
 			v = tonumber(a[2])
 		end
-		
-		
-		
-		
+
+
+
+
 		if a and a[1] and getPlayer(a[1]) and not stopfling then
 			runCmd("walkfling ".. v)
 			runCmd("loopto ".. a[1])
-			
-			
+
+
 			repeat
 				task.wait()
 			until stopfling or getPlayer(a[1]).Character.PrimaryPart.Velocity.Magnitude >= 100 or plr.Character:FindFirstChildWhichIsA("Humanoid").Health <= 0 or getPlayer(a[1]).Character:FindFirstChildWhichIsA("Humanoid").Health <= 0
-			
+
 			runCmd("unwalkfling")
 			runCmd("unloopto")
 			runCmd("freeze")
@@ -1259,36 +1274,36 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			runCmd("unfreeze")
 		end
 	end)
-	
+
 	addCommand("stopfling", {}, "Stop the current fling", {}, function(a)
 		stopfling = true
 		task.delay(3, function()
 			stopfling = false
 		end)
 	end)
-	
+
 	addCommand("toolfling", {"tfling"}, "Shove a tool into your character to act as your collision part. This allows you to fling people in games that have tools with collisions but have character collisions disabled.", {"player", "strength"}, function(a)
 		if a and a[1] then
 			local v = 1
 			if a[2] and tonumber(a[2]) then
 				v = tonumber(a[2])
 			end
-			
+
 			local char = plr.Character
 			if char then
 				local tool = char:FindFirstChildWhichIsA("Tool")
 				if tool and tool.RequiresHandle and tool:FindFirstChild("Handle") then
 					local savedgrippos = tool.GripPos
-					
+
 					runCmd("grippos 2 1 1")
 					runCmd("fling ".. a[1].. " ".. v)
 					runCmd("grippos ".. savedgrippos.X.. " ".. savedgrippos.Y.. " ".. savedgrippos.Z)
-					
+
 				end
 			end
-			
-			
-			
+
+
+
 		end
 	end)
 
@@ -1688,14 +1703,14 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	local espcontainer = Instance.new("Folder", scr)
 	espcontainer.Name = rName()
 	setName(espcontainer, "EspContainer")
-	
+
 	addCommand("locate", {"find"}, "Apply ESP to a player", {"player"}, function(a)
 		if a and a[1] then
 			local player: Player = getPlayer(a[1])
 			if player then
-				
+
 				print(esps[player])
-				
+
 				if not esps[player] then
 					local plrFolder = Instance.new("Folder", espcontainer)
 					plrFolder.Name = rName()
@@ -1705,7 +1720,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 							if esps[player] then
 								disconnectTable(esps[player])
 								table.remove(esps, table.find(esps, player))
-								
+
 							end
 							local folder = getChild(scr, esps[player.Name])
 							if folder then folder:Destroy() end
@@ -1714,22 +1729,22 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 							if esps[player] then
 								disconnectTable(esps[player])
 								table.remove(esps, table.find(esps, player))
- 
+
 							end
 							local folder = getChild(scr, esps[player.Name])
 							if folder then folder:Destroy() end
 						end)
-						
+
 					}
-					
+
 					local character = player.Character
 					repeat
 						wait()
 						character = player.Character
 					until character
-					
+
 					local hum = character:FindFirstChildWhichIsA("Humanoid")
-					
+
 					for i, v in pairs(character:GetChildren()) do
 
 						if v:IsA("BasePart") then
@@ -1780,7 +1795,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 							end
 						end
 					end
-					
+
 
 					local wireframe = Instance.new("WireframeHandleAdornment", plrFolder)
 					wireframe.Name = rName()
@@ -1789,13 +1804,13 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 					wireframe.Color3 = Color3.new(1,1,1)
 					wireframe.AlwaysOnTop = true
 					wireframe.ZIndex = 5
-					
-					
+
+
 				end
-				
-				
-				
-				
+
+
+
+
 				if not espcon then
 					espcon = runsrv.Heartbeat:Connect(function()
 						local int = 0
@@ -1818,15 +1833,15 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 									elseif name and name == "wireframeoutline" and c:IsA("WireframeHandleAdornment") then
 										c:Clear()
 										c.Adornee = i.Character
-										
+
 										c.Color3 = i.TeamColor.Color
-										
+
 										local bbpos, bbsize = i.Character:GetBoundingBox()
-										
+
 										local x = bbsize.X / 2
 										local y = bbsize.Y / 2
 										local z = bbsize.Z / 2
-										
+
 										local lines = {
 											Vector3.new(x, y, z),
 											Vector3.new(x, -y, z),
@@ -1854,7 +1869,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 											Vector3.new(x, -y, z),
 
 										}
-										
+
 										c:AddLines(lines)
 									elseif name and name == "GUI" and c:IsA("BillboardGui") then
 										local label = c:FindFirstChildWhichIsA("TextLabel")
@@ -1876,7 +1891,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end)
-	
+
 	addCommand("unlocate", {}, "Unlocate a player or everyone if [player] is unspecified.", {"player"}, function(a)
 		if a and a[1] then
 			local player = getPlayer(a[1]) 
@@ -1895,16 +1910,16 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end)
-	
+
 	local espplayeraddconn = nil
-	
+
 	addCommand("esp", {}, "Equivalent to running locate all", {}, function(a)
 		if not espcon then
 			runCmd("locate all")
 		else
 			runCmd("unlocate all")
 		end
-		
+
 		if not espplayeraddconn then
 			espplayeraddconn = players.PlayerAdded:Connect(function(p)
 				runCmd(`locate {p.Name}`)
@@ -1913,7 +1928,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			espplayeraddconn:Disconnect()
 			espplayeraddconn = nil
 		end
-		
+
 	end)
 
 	addCommand("headsize", {"hs", "hsize"}, "Set [player]'s headsize.", {"player", "size"}, function(a)
@@ -2070,7 +2085,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			loopAAA = nil
 		end
 	end)
-	
+
 	addCommand("gripposition", {"grippos"}, "Set the grip position of all equipped tools to the provided values", {"x","y","z"}, function(a)
 		if a and a[1] and a[2] and a[3] and tonumber(a[1]) and tonumber(a[2]) and tonumber(a[3]) then
 			local char = plr.Character
@@ -2086,7 +2101,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		end
 	end)
 
-	
+
 
 	addCommand("nosit", {}, "Remove your humanoid's ability to sit.", {}, function(a)
 		if plr.Character then
@@ -2152,7 +2167,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 
 	end)
-	
+
 	addCommand("mouseteleport", {"mousetp", "mtp"}, "Teleport to your mouse", {}, function(a)
 		local mouse = plr:GetMouse()
 		if mouse and mouse.Hit then
@@ -2161,13 +2176,13 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 	end)
 
 	addCommand("serverhop", {}, "Rejoin the game in a random server.", {}, function(a)
-		
+
 		notify("Rejoin", "Please wait...", 2)
 		wait(1)
-		
+
 		teleports:Teleport(game.PlaceId, plr)
 	end)
-	
+
 	addCommand("rejoin", {"rj"}, "Rejoin the same server.", {}, function(a)
 
 		notify("Rejoin", "Please wait...", 2)
@@ -2175,18 +2190,18 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 		teleports:TeleportToPlaceInstance(game.PlaceId, game.JobId, plr)
 	end)
-	
+
 	local freecamconn = nil
 	local freecamconninput = nil
 	local freecamspeed = 1
 	addCommand("freecam", {"fc"}, nil, {"speed"}, function(a)
-		
+
 		local speedpassed = false
 		if a and a[1] and tonumber(a[1]) then
 			freecamspeed = tonumber(a[1])
 			speedpassed = true
 		end
-		
+
 		if freecamconn and not speedpassed then
 			freecamconn:Disconnect()
 			freecamconninput:Disconnect()
@@ -2196,40 +2211,39 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			cas:UnbindAction("BlockMovement")
 			return
 		end
-		
+
 		if not freecamconn then
-			cas:BindAction("BlockMovement", function() return Enum.ContextActionResult.Sink end, false, Enum.KeyCode.W, Enum.KeyCode.D, 
-				Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.Space, Enum.KeyCode.Up, Enum.KeyCode.Down, Enum.KeyCode.Right, Enum.KeyCode.Left)
+			cas:BindAction("BlockMovement", function() return Enum.ContextActionResult.Sink end, false, Enum.KeyCode.W, Enum.KeyCode.D, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.Space, Enum.KeyCode.Up, Enum.KeyCode.Down, Enum.KeyCode.Right, Enum.KeyCode.Left)
 
 			freecamconn = runsrv.RenderStepped:Connect(function(dt)
-				
+
 				local movevec = Vector3.zero
 				local cf = workspace.CurrentCamera.CFrame
-				
+
 				if uis:IsKeyDown(Enum.KeyCode.W) then movevec += cf.LookVector * freecamspeed end
 				if uis:IsKeyDown(Enum.KeyCode.S) then movevec -= cf.LookVector * freecamspeed end
 				if uis:IsKeyDown(Enum.KeyCode.D) then movevec += cf.RightVector * freecamspeed end
 				if uis:IsKeyDown(Enum.KeyCode.A) then movevec -= cf.RightVector * freecamspeed end
 				if uis:IsKeyDown(Enum.KeyCode.E) then movevec += cf.UpVector * freecamspeed end
 				if uis:IsKeyDown(Enum.KeyCode.Q) then movevec -= cf.UpVector * freecamspeed end
-				
+
 			end)
 		end
-		
-		
-		
-		
-		
+
+
+
+
+
 	end)
-	
-	
+
+
 	local gameType = nil
 	vulnerabilities = loadstring(game:HttpGet("https://raw.githubusercontent.com/aezurewrath/AEZURE/refs/heads/main/vulnerabilities.lua"))()
-	
+
 	genv.vulnMethods = {}
 
 	for i, v in pairs(vulnerabilities) do
-		
+
 		if readfile then
 			for it, method in pairs(v.methods) do
 				local s, e = pcall(function()
@@ -2241,7 +2255,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 				genv.vulnMethods[it] = v.methods[it]
 			end
 		end
-		
+
 		for _, command in pairs(v.commands) do
 			command[1] = `{i}:{command[1]}`
 			for ti, alias in pairs(command[2]) do
@@ -2250,12 +2264,12 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			addCommand(unpack(command))
 		end
 	end
-	
+
 	if listfiles then
 		local s, e = pcall(function()
 			return listfiles(`aezure`)
 		end)
-		
+
 		if s and e then
 			for i, v in pairs(e) do
 				local split = string.split(v, ".")
@@ -2274,10 +2288,10 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end
-	
+
 	currentplugin = nil
-	
-	
+
+
 	addCommand("reloadmethods", {}, "Reload your method overwrites", {}, function(a)
 		for i, v in pairs(vulnerabilities) do
 			if readfile then
@@ -2293,19 +2307,22 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end)
-	
-	addCommand("scan", {"findremote"}, "Search for vulnerabilities in games. If [path] is specified, it will scan only in the path. Provide [type] to search for a specific type. Use command 'types' to view all vuln types. ", {"type", "path"}, function(a)
+
+	addCommand("scan", {"findremote"}, "Search for vulnerabilities in games. If [path] is specified, it will scan only in the path.", {"type", "path"}, function(a)
 		local path = game
 		if a and a[2] then
 			local s, e = pcall(function()
 				path = loadstring("return ".. tostring(a[2]))()
 			end)
 		end
-		
-		
+
+
 		print(vulnerabilities[a[1]])
 		print(a[1])
-		if vulnerabilities[a[1]] then
+		
+		if string.lower(a[1]) == "acs" then
+			runCmd("scan explosion")
+		elseif vulnerabilities[a[1]] then
 			local scan = vulnerabilities[a[1]].scan(path)
 			if scan then
 				notify("Scan Result", `{scan.Name} has been found`, 5)
@@ -2345,7 +2362,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 		end)
 
 	end
-	
+
 	-- [[COMMAND BAR SETUP]] --
 
 
@@ -2358,7 +2375,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 	local selectedPrediction = nil
 	local predictionsList = {}
-	
+
 	cmdBar:GetPropertyChangedSignal("Text"):Connect(function()
 		cmdBar.Text = string.gsub(cmdBar.Text, "	", "")
 		if cmdBar.Text ~= "" and not string.split(cmdBar.Text, " ")[2] then
@@ -2372,12 +2389,18 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			for i, v in pairs(cmds) do
 				for z, c in ipairs(v["aliases"]) do
 					local c1 = string.split(c, ":")
+					local c2 = string.split(c, ":")
 					if #c1 > 1 then
 						table.remove(c1, 1)
 					end
+					if #c2 > 1 then
+						table.remove(c2, 2)
+					end
 					c1 = table.concat(c1, "")
+					c2 = table.concat(c2, "")
 					local a = string.sub(string.lower(c1),1,string.len(cmdBar.Text))
-					if string.match(a, cmdBar.Text) then
+					local b = string.sub(string.lower(c2),1,string.len(cmdBar.Text))
+					if string.match(a, cmdBar.Text) or string.match(b, cmdBar.Text) then
 						count += 1
 						local prediction : GuiObject = aeLib.AddPrediction(commandlineMain.Predictions, c)
 						table.insert(predictionsList, prediction)
@@ -2385,13 +2408,13 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 							commandlineMain.Predictions.CanvasSize += UDim2.new(0,0,0,prediction.AbsoluteSize.Y)
 							commandlineMain.Predictions.CanvasPosition = Vector2.new(0, commandlineMain.Predictions.CanvasSize.Y.Offset)
 						end
-						
+
 					end
 				end
 			end
-			
+
 			local lastprediction = predictionsList[#predictionsList]
-			
+
 			if lastprediction then
 				lastprediction.BackgroundColor3 = colors.light
 				lastprediction.BorderColor3 = colors.white
@@ -2463,8 +2486,8 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 						end
 					end
 				end
-				
-				
+
+
 			end
 		else
 			if cmdBar:IsFocused() then
@@ -2504,7 +2527,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 						local split = string.split(cmdBar.Text, " ")
 						split[#split] = selectedPrediction.Text
 						split = table.concat(split, " ")
-						
+
 						cmdBar.Text = split
 						cmdBar.CursorPosition = #cmdBar.Text
 					end
@@ -2512,21 +2535,21 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 			end
 		end
 	end)
-	
+
 	wait(.5)
 	closeCmdLine()
 	--closeCLog:Play()
-	
-	
 
-	
-	
-	
-	
-	
-	
-	  
-	
+
+
+
+
+
+
+
+
+
+
 
 	notify("Loaded fully!", "ÆZURE has fully loaded!", 5)
 	notify("⚠️IMPORTANT⚠️", "This is a beta version of ÆZURE. Expect bugs.", 5)
