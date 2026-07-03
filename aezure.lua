@@ -2060,7 +2060,7 @@ if not core:FindFirstChild(scrName) and not alreadyrunning then
 
 	loopAAA = nil
 	local ampl = 1
-	addCommand("velocitywalk", {"velwalk", "vwalk"}, "Give yourself velocity in the direction you're walking, emulating setting your walkspeed.", {"velocity"}, function(a)
+	addCommand("velocitywalk", {"velwalk", "vwalk", "brick"}, "Give yourself velocity in the direction you're walking, emulating setting your walkspeed.", {"velocity"}, function(a)
 		if a and a[1] and tonumber(a[1]) then
 			ampl = tonumber(a[1])
 		end
